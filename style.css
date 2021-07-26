@@ -1,6 +1,6 @@
 body {
   background-color: hsl(185, 41%, 84%);
-  background-image: url(images/logo.svg);
+  background-image: url(logo.svg);
   background-repeat: no-repeat;
   background-position: center -200%;
   font-size: 12px;
