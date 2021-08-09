@@ -5,14 +5,56 @@ const tip15 = document.getElementById('tip15');
 const tip25 = document.getElementById('tip25');
 const tip50 = document.getElementById('tip50');
 
-const tipCustom = document.getElementById('tipCustom');
-const NumberOfPeople = document.getElementById('NumberOfPeople');
+const tip = document.querySelectorAll('.tip');
 
-billForDivision.addEventListener('change', recalculateBill);
-NumberOfPeople.addEventListener('change', recalculateBill);
+const tipCustom = document.getElementById('tipCustom');
+const numberOfPeople = document.getElementById('numberOfPeople');
+const totalPerPerson = document.getElementById('totalPerPerson');
+let tipPerPerson = document.getElementById('tipPerPerson');
+
+
+let onePersonPays = 0;
+
+
+
+
+
+
+
+
+tip.forEach((input) => {
+  input.addEventListener('click', recalculateBill);
+
+
+});
 
 
 function recalculateBill() {
-  let bill = billForDivision.value / NumberOfPeople.value;
+
+
+
+
+  tipPerPerson.value = (billForDivision.value * parseInt(this.value) / 100) / numberOfPeople.value;
+
+
+  let bill = (billForDivision.value / numberOfPeople.value) + tipPerPerson.value;
+
+
+
+
   console.log(bill);
-}
+  totalPerPerson.value = bill;
+
+
+
+
+
+};
+
+
+
+
+
+
+billForDivision.addEventListener('input', recalculateBill);
+numberOfPeople.addEventListener('change', recalculateBill);
