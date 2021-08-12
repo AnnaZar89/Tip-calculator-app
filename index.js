@@ -1,4 +1,4 @@
-const billForDivision = document.getElementById('billForDivision');
+let billForDivision = document.getElementById('billForDivision');
 const tip5 = document.getElementById('tip5');
 const tip10 = document.getElementById('tip10');
 const tip15 = document.getElementById('tip15');
@@ -8,18 +8,19 @@ const tip50 = document.getElementById('tip50');
 const tip = document.querySelectorAll('.tip');
 
 const tipCustom = document.getElementById('tipCustom');
-const numberOfPeople = document.getElementById('numberOfPeople');
+let numberOfPeople = document.getElementById('numberOfPeople');
 const totalPerPerson = document.getElementById('totalPerPerson');
 let tipPerPerson = document.getElementById('tipPerPerson');
-
-
-let onePersonPays = 0;
-
+const btnReset = document.querySelector('.btn');
 
 
 
 
+tip.forEach((input) => {
+  input.addEventListener('click', recalculateTip);
 
+
+});
 
 
 tip.forEach((input) => {
@@ -29,27 +30,42 @@ tip.forEach((input) => {
 });
 
 
+function recalculateTip() {
+
+  tipPerPerson.value = ((billForDivision.value * this.value / 100) / numberOfPeople.value).toFixed(2);
+
+
+}
+
+
+
+
+
 function recalculateBill() {
 
 
 
-
-  tipPerPerson.value = (billForDivision.value * parseInt(this.value) / 100) / numberOfPeople.value;
-
-
-  let bill = (billForDivision.value / numberOfPeople.value) + tipPerPerson.value;
+  let bill = (billForDivision.value / numberOfPeople.value) + Number(tipPerPerson.value);
 
 
+  if (numberOfPeople.value != '' && billForDivision.value != '') {
+    totalPerPerson.value = bill.toFixed(2);
 
+    console.log(Number(tipPerPerson.value));
 
-  console.log(bill);
-  totalPerPerson.value = bill;
+  } else {
 
-
-
-
+    totalPerPerson.value = '0.00';
+  };
 
 };
+
+function reset() {
+  totalPerPerson.reset();
+  tipPerPerson.reset();
+}
+
+
 
 
 
@@ -57,4 +73,5 @@ function recalculateBill() {
 
 
 billForDivision.addEventListener('input', recalculateBill);
-numberOfPeople.addEventListener('change', recalculateBill);
+numberOfPeople.addEventListener('input', recalculateBill);
+btnReset.addEventListener('click', reset);
