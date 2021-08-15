@@ -12,15 +12,12 @@ let numberOfPeople = document.getElementById('numberOfPeople');
 const totalPerPerson = document.getElementById('totalPerPerson');
 let tipPerPerson = document.getElementById('tipPerPerson');
 const btnReset = document.querySelector('.btn');
+var newItem = document.createElement('span');
 
+var howManyPpl = document.querySelector('.HowManyPeople');
 
-
-
-tip.forEach((input) => {
-  input.addEventListener('click', recalculateTip);
-
-
-});
+var textNode = document.createTextNode("Can't be 0");
+newItem.appendChild(textNode);
 
 
 tip.forEach((input) => {
@@ -30,39 +27,47 @@ tip.forEach((input) => {
 });
 
 
-function recalculateTip() {
-
-  tipPerPerson.value = ((billForDivision.value * this.value / 100) / numberOfPeople.value).toFixed(2);
-
-
-}
-
-
-
-
 
 function recalculateBill() {
 
+  let variableChecked = document.querySelector('input[type="radio"]:checked');
+
+
+  const tipPourcentage = variableChecked ? variableChecked.value : 0;
+  tipPerPerson.value = ((billForDivision.value * tipPourcentage / 100) / numberOfPeople.value).toFixed(2);
 
 
   let bill = (billForDivision.value / numberOfPeople.value) + Number(tipPerPerson.value);
 
 
-  if (numberOfPeople.value != '' && billForDivision.value != '') {
-    totalPerPerson.value = bill.toFixed(2);
+  if (numberOfPeople.value === '0') {
 
-    console.log(Number(tipPerPerson.value));
+
+    howManyPpl.insertBefore(newItem, howManyPpl.childNodes[2]);
+
+    tipPerPerson.value = '0.00';
+
+
+  } else if (numberOfPeople.value != '' && billForDivision.value != '') {
+
+    totalPerPerson.value = bill.toFixed(2);
+    console.log(typeof billForDivision.value);
+
 
   } else {
-
+    newItem.remove();
     totalPerPerson.value = '0.00';
+    tipPerPerson.value = '0.00';
   };
 
 };
 
 function reset() {
-  totalPerPerson.reset();
-  tipPerPerson.reset();
+  billForDivision.value = '0';
+  numberOfPeople.value = '1';
+  recalculateBill();
+
+
 }
 
 
