@@ -161,7 +161,20 @@ body {
 
 
 .HowManyPeaople {
+
   padding-bottom: 8%;
+
+
+
+}
+
+.HowManyPeople span {
+  margin-left: 45px;
+  color: orangered;
+}
+
+.HowManyPeaople label {
+  /*  display: inline-block;*/
 }
 
 #numberOfPeople {
